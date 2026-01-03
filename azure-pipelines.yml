@@ -27,11 +27,9 @@ stages:
            inputs:
              targetType: 'inline'
              script: |
-               Invoke-WebRequest -Uri "https://github.com/biomejs/biome/releases/download/%40biomejs%2Fbiome%402.3.8/biome-win32-x64.exe"
-               
-               -OutFile "$(Agent.ToolsDirectory)/biome.exe"
-               
-               $(Agent.ToolsDirectory)/biome.exe lint $(System.DefaultWorkingDirectory)/src/
+               npm install -g @biomejs/biome
+               npx @biomejs/biome lint
+             workingDirectory: '$(System.DefaultWorkingDirectory)/src'
 
         #  - task: PowerShell@2
         #    continueOnError: true
