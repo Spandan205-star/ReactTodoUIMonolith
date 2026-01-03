@@ -41,7 +41,7 @@ stages:
             script: |
               npm install -g stylelint
               npm install -g stylelint-config-standard
-              npx stylelint "src/**/*.css" --config src/stylelint.config.mjs
+              npx stylelint "src/**/*.css" 
 
          - task: PowerShell@2
            continueOnError: true
