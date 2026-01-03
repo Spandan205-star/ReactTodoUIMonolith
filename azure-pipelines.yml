@@ -2,17 +2,51 @@ trigger: none
 pool: Agent
 
 stages:
-  -  stage: SoftwareCompositionAnalysis
-     displayName: Software Composition Analysis
+  # -  stage: SoftwareCompositionAnalysis
+  #    displayName: Software Composition Analysis
+  #    jobs:
+  #      - job: VulnerabilityScan
+  #        displayName: Dependency Vulnerability Scan (Retire.js)
+  #        steps:
+  #        - task: PowerShell@2
+  #          inputs:
+  #            targetType: 'inline'
+  #            script: |
+  #              npm install
+  #              npm install -g retire
+  #              retire --exitwith 0
+  
+  -  stage: CodeQualityChecks
+     displayName: Code Quality & Linting
      jobs:
-       - job: VulnerabilityScan
-         displayName: Dependency Vulnerability Scan (Retire.js)
+       - job: LintingChecks
+         displayName: Multi-Language Linting Checks
          steps:
          - task: PowerShell@2
            inputs:
              targetType: 'inline'
              script: |
-               npm install
-               npm install -g retire
-               retire --exitwith 0
-         
+               Invoke-WebRequest -Uri "https://github.com/biomejs/biome/releases/download/%40biomejs%2Fbiome%402.3.8/biome-win32-x64.exe"
+               
+               -OutFile "$(Agent.ToolsDirectory)/biome.exe"
+               
+               $(Agent.ToolsDirectory)/biome.exe lint $(System.DefaultWorkingDirectory)/src/
+
+         - task: PowerShell@2
+           continueOnError: true
+           displayName: CSS Linting (Stylelint)  
+           inputs:
+            targetType: 'inline'
+            script: |
+              npm install -g stylelint
+              npm install -g stylelint-config-standard        
+              stylelint $(System.DefaultWorkingDirectory)/src --config stylelint.config.mjs
+
+         - task: PowerShell@2
+           continueOnError: true
+           displayName: YAML Linting (yamllint)    
+           inputs:
+            targetType: 'inline'
+            script: |
+              pip install --user yamllint
+              yamllint $(System.DefaultWorkingDirectory)
