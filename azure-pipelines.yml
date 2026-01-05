@@ -34,10 +34,17 @@ stages:
             workingDir: '$(System.DefaultWorkingDirectory)'
             customCommand: 'run build'
         
-        - task: Npm@1
-          displayName: publish ho raha hai
+        # - task: Npm@1
+        #   displayName: publish ho raha hai
+        #   inputs:
+        #     command: 'publish'
+        #     workingDir: '$(System.DefaultWorkingDirectory)'
+        #     publishRegistry: 'useFeed'
+        #     publishFeed: '0d9e4808-05a5-4a05-9d83-0fd0fdd8ae32'
+
+        - task: PublishBuildArtifacts@1
           inputs:
-            command: 'publish'
-            workingDir: '$(System.DefaultWorkingDirectory)'
-            publishRegistry: 'useFeed'
-            publishFeed: '0d9e4808-05a5-4a05-9d83-0fd0fdd8ae32'
+            PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+            ArtifactName: 'todo'
+            publishLocation: 'FilePath'
+            TargetPath: '$(Build.ArtifactStagingDirectory)/build'
