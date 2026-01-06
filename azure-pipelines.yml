@@ -56,7 +56,7 @@ stages:
         - task: CopyFilesOverSSH@0 # Artifact ko copy karke VM mai dal rahe hai through copyssh
           inputs:
             sshEndpoint: 'VMtodo'
-            sourceFolder: '$(Build.ArtifactStagingDirectory)/build'
+            sourceFolder: '$(Build.ArtifactStagingDirectory)'
             contents: '**'
             targetFolder: '/home/adminuser1/todoapp'
             cleanTargetFolder: true
