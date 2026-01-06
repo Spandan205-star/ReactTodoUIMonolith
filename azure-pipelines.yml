@@ -65,5 +65,10 @@ stages:
           inputs:
             sshEndpoint: 'VMtodo'
             runOptions: 'commands'
-            commands: 'sudo cp -r /home/adminuser1/todoapp/ * var/www/html'
+            commands: |
+              export DEBIAN_FRONTEND=noninteractive 
+              sudo apt-get update -y 
+              sudo apt-get install nginx -y
+               sudo systemctl restart nginx sudo systemctl is-enabled nginx || sudo systemctl enable nginx
+              sudo cp -r /home/adminuser1/todoapp/ * var/www/html
             readyTimeout: '20000'
