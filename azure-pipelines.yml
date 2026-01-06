@@ -60,7 +60,8 @@ stages:
             downloadType: 'single'
             artifactName: 'todo'
             downloadPath: '$(System.ArtifactsDirectory)'
-            cleanDestinationFolder: true
+            
+
         - task: CopyFilesOverSSH@0 # Artifact ko copy karke VM mai dal rahe hai through copyssh
           inputs:
             sshEndpoint: 'VMtodo'
