@@ -14,7 +14,7 @@ stages:
       - job: nodeinstalljob
         displayName: nodewa install ho raha hai
         steps:
-        - task: NodeTool@0
+        - task: NodeTool@0  #node_module folder create hota hai
           displayName: nodewa install ho raha hai
           inputs:
             versionSource: 'spec'
@@ -28,7 +28,7 @@ stages:
             workingDir: '$(System.DefaultWorkingDirectory)'
         
         - task: Npm@1
-          displayName: npm build
+          displayName: npm build #agent pe build folder banega
           inputs:
             command: 'custom'
             workingDir: '$(System.DefaultWorkingDirectory)'
@@ -48,3 +48,17 @@ stages:
             ArtifactName: 'todo'
             publishLocation: 'FilePath'
             TargetPath: '$(Build.ArtifactStagingDirectory)/build'
+
+  - stage: Deploy
+    displayName: Deploy todo
+    jobs:
+      - job: Deplotodo
+        steps:
+        - task: DownloadBuildArtifacts@1
+          inputs:
+            buildType: 'current'
+            downloadType: 'single'
+            artifactName: 'todo'
+            downloadPath: '$(System.ArtifactsDirectory)'
+            cleanDestinationFolder: true
+        
