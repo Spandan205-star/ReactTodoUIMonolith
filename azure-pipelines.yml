@@ -36,10 +36,9 @@ stages:
 
         - task: PublishBuildArtifacts@1
           inputs:
-            PathtoPublish: build
+            PathtoPublish: 'build'
             ArtifactName: 'todo'
-            publishLocation: 'FilePath'
-            TargetPath: '$(Build.ArtifactStagingDirectory)/build'
+            publishLocation: 'Container'
 
   - stage: Deploy   #Artifact Download kar rahe hai
     displayName: Deploy todo
