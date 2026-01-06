@@ -65,10 +65,17 @@ stages:
           inputs:
             sshEndpoint: 'VMtodo'
             runOptions: 'commands'
-            commands: |
-              export DEBIAN_FRONTEND=noninteractive 
-              sudo apt-get update -y 
-              sudo apt-get install nginx -y
-               sudo systemctl restart nginx sudo systemctl is-enabled nginx || sudo systemctl enable nginx
-              sudo cp -r /home/adminuser1/todoapp/ * var/www/html
+            commands:  |
+              set -e
+
+              sudo DEBIAN_FRONTEND=noninteractive apt-get update -y
+              sudo DEBIAN_FRONTEND=noninteractive apt-get install -y nginx
+
+              sudo systemctl restart nginx
+              sudo systemctl enable nginx
+
+              sudo rm -rf /var/www/html/*
+              sudo cp -r /home/adminuser1/todoapp/* /var/www/html/
+
+              sudo systemctl reload nginx
             readyTimeout: '20000'
