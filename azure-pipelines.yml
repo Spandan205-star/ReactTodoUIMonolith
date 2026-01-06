@@ -75,7 +75,7 @@ stages:
               sudo systemctl enable nginx
 
               sudo rm -rf /var/www/html/*
-              sudo cp -r /home/adminuser1/todoapp/* /var/www/html/
+              sudo cp -r /home/adminuser1/todoapp/todo/* /var/www/html/
 
-              sudo systemctl reload nginx
+              
             readyTimeout: '20000'
