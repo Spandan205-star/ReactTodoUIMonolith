@@ -40,12 +40,19 @@ stages:
             script: |
               npm install
               npm run build
+            workingDirectory: '$(System.DefaultWorkingDirectory)'
 
-        - task: PublishBuildArtifacts@1
+        # - task: PublishBuildArtifacts@1
+        #   inputs:
+        #     PathtoPublish: '$(System.DefaultWorkingDirectory)/build'
+        #     ArtifactName: 'todo'
+        #     publishLocation: 'Container'
+        
+        - task: PublishPipelineArtifact@1
           inputs:
-            PathtoPublish: '$(System.DefaultWorkingDirectory)/build'
-            ArtifactName: 'todo'
-            publishLocation: 'Container'
+            targetPath: '$(System.DefaultWorkingDirectory)/build'
+            artifact: 'todo-ui'
+            publishLocation: 'pipeline'
 
   # - stage: Deploy   #Artifact Download kar rahe hai
   #   displayName: Deploy todo
