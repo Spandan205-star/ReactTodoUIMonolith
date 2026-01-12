@@ -31,7 +31,7 @@ stages:
           displayName: npm build #agent pe build folder banega
           inputs:
             command: 'custom'
-            workingDir: '$(System.DefaultWorkingDirectory)/ReactTodoUIMonolith'
+            workingDir: '$(System.DefaultWorkingDirectory)'
             customCommand: 'run build'
 
   #       - task: PublishBuildArtifacts@1
