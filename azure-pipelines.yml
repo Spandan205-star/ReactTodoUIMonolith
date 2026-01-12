@@ -34,11 +34,11 @@ stages:
             workingDir: '$(System.DefaultWorkingDirectory)'
             customCommand: 'run build'
 
-        - task: PublishBuildArtifacts@1
-          inputs:
-            PathtoPublish: '$(System.DefaultWorkingDirectory)/build'
-            ArtifactName: 'todo'
-            publishLocation: 'Container'
+        # - task: PublishBuildArtifacts@1
+        #   inputs:
+        #     PathtoPublish: '$(System.DefaultWorkingDirectory)/build'
+        #     ArtifactName: 'todo'
+        #     publishLocation: 'Container'
 
   # - stage: Deploy   #Artifact Download kar rahe hai
   #   displayName: Deploy todo
