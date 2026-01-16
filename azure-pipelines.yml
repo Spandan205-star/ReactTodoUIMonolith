@@ -18,20 +18,20 @@ stages:
         dependsOn: nodeInstall
         displayName: Npm Install
         steps:
-        - task: PowerShell@2
+        - task: Bash@3
           inputs:
             targetType: 'inline'
-            script: 'npm install'
+            script: 'sudo npm install'
             
       
       - job: npmbuild
         dependsOn: npmInstall
         displayName: npm build
         steps:
-        - task: PowerShell@2
+        - task: Bash@3
           inputs:
             targetType: 'inline'
-            script: 'npm run build'
+            script: 'sudo npm run build'
 
       - job: ArtifactPublish
         dependsOn: npmbuild
