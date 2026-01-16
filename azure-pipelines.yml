@@ -42,7 +42,7 @@ stages:
           inputs:
             buildType: 'current'
             artifactName: 'todo'
-            targetPath: '$(Pipeline.Workspace)/todo'
+            targetPath: '$(Pipeline.Workspace)'
         
       - job: copyOverSSH
         displayName: Copy over ssh
@@ -51,7 +51,7 @@ stages:
         - task: CopyFilesOverSSH@0
           inputs:
             sshEndpoint: 'VMtodo'
-            sourceFolder: '$(Pipeline.Workspace)/todo'
+            sourceFolder: '$(Pipeline.Workspace)'
             contents: '**'
             targetFolder: '/home/rajat'
             readyTimeout: '20000'
