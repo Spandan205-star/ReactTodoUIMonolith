@@ -53,7 +53,7 @@ stages:
             sshEndpoint: 'VMtodo'
             sourceFolder: '$(Pipeline.Workspace)'
             contents: '**'
-            targetFolder: '/home/rajat'
+            targetFolder: '/home/sanjay'
             readyTimeout: '20000'
 
       - job: sshthroughCopy
