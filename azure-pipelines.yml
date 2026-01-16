@@ -14,29 +14,16 @@ stages:
             versionSource: 'spec'
             versionSpec: '17.x'
 
-      - job: npmInstall
-        dependsOn: nodeInstall
-        displayName: Npm Install
-        steps:
         - task: Bash@3
           inputs:
             targetType: 'inline'
             script: 'npm install'
             
-      
-      - job: npmbuild
-        dependsOn: npmInstall
-        displayName: npm build
-        steps:
         - task: Bash@3
           inputs:
             targetType: 'inline'
             script: 'npm run build'
 
-      - job: ArtifactPublish
-        dependsOn: npmbuild
-        displayName: Artifact publish
-        steps:
         - task: PublishPipelineArtifact@1
           inputs:
             targetPath: '$(Pipeline.Workspace)'
