@@ -22,7 +22,7 @@ stages:
           inputs:
             targetType: 'inline'
             script: 'npm install'
-            workingDirectory: '$(System.DefaultWorkingDirectory)'
+            
       
       - job: npmbuild
         dependsOn: npmInstall
