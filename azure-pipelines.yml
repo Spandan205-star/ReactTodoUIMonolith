@@ -67,7 +67,12 @@ stages:
             sshEndpoint: 'VMtodo'
             runOptions: 'commands'
             commands: |
-              sudo apt-get update
+              sudo export DEBIAN_FRONTEND=noninteractive
+              
+              sudo apt-get update -y
+              sudo apt-get upgrade -y
+              sudo apt-get install -y rsync openssh-client
+              
               sudo apt-get install nginx -y
               sudo cp -r /home/adminuser/* /var/www/html
             readyTimeout: '20000'
