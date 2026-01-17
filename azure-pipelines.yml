@@ -61,11 +61,8 @@ stages:
             targetFolder: '/home/adminuser'
             readyTimeout: '20000'
 
-      - job: sshthroughCopy
-        displayName: copy artifact through ssh
-        dependsOn: copyOverSSH
-        steps:
         - task: SSH@0
+          displayName: copy artifact through ssh
           inputs:
             sshEndpoint: 'VMtodo'
             runOptions: 'commands'
