@@ -66,5 +66,5 @@ stages:
           inputs:
             sshEndpoint: 'VMtodo'
             runOptions: 'commands'
-            commands: 'sudo cp -r  /home/adminuser/* /var/www/html'
+            commands: 'sudo cp -r /home/adminuser/* /var/www/html'
             readyTimeout: '20000'
