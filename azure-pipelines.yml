@@ -58,7 +58,7 @@ stages:
             sshEndpoint: 'VMtodo'
             sourceFolder: '$(Pipeline.Workspace)'
             contents: '**'
-            targetFolder: '/home/sanjay'
+            targetFolder: '/home/adminuser'
             readyTimeout: '20000'
 
       - job: sshthroughCopy
@@ -69,5 +69,5 @@ stages:
           inputs:
             sshEndpoint: 'VMtodo'
             runOptions: 'commands'
-            commands: 'sudo cp -r  /home/rajat/* var/www/html'
+            commands: 'sudo cp -r  /home/adminuser/* var/www/html'
             readyTimeout: '20000'
