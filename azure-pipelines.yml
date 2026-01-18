@@ -31,7 +31,7 @@ stages:
         - task: PublishPipelineArtifact@1
           displayName: Artifact Publish
           inputs:
-            targetPath: '$(Pipeline.Workspace)'
+            targetPath: '$(Pipeline.Workspace)/todo'
             artifact: 'todo'
             publishLocation: 'pipeline'
 
@@ -47,7 +47,7 @@ stages:
           inputs:
             buildType: 'current'
             artifactName: 'todo'
-            targetPath: '$(Pipeline.Workspace)'
+            targetPath: '$(Pipeline.Workspace)/todo'
         
       - job: copyOverSSH
         displayName: Copy over ssh
@@ -56,9 +56,9 @@ stages:
         - task: CopyFilesOverSSH@0
           inputs:
             sshEndpoint: 'VMtodo'
-            sourceFolder: '$(Pipeline.Workspace)'
+            sourceFolder: '$(Pipeline.Workspace)/todo'
             contents: '**'
-            targetFolder: '/home/adminuser'
+            targetFolder: '/home/adminuser/todo'
             readyTimeout: '20000'
 
         - task: SSH@0
@@ -67,9 +67,6 @@ stages:
             sshEndpoint: 'VMtodo'
             runOptions: 'commands'
             commands: |
-              sudo DEBIAN_FRONTEND=noninteractive apt-get update -y
-              sudo DEBIAN_FRONTEND=noninteractive apt-get upgrade -y
-              sudo DEBIAN_FRONTEND=noninteractive apt-get install -y nginx rsync openssh-client
-              sudo apt-get install nginx -y
-              sudo cp -r /home/adminuser/* /var/www/html
+              sudo apt install nginx -y
+              sudo cp -r /home/adminuser/todo/* /var/www/html
             readyTimeout: '20000'
